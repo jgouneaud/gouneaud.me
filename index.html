@@ -358,6 +358,8 @@
     z-index: 200;
     transition: opacity 0.2s;
     text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
   }
   .pdf-btn:hover { opacity: 0.85; }
   @media print {
@@ -592,7 +594,7 @@
 </head>
 <body>
 
-<button class="pdf-btn" onclick="window.print()">⬇ Télécharger PDF</button>
+<a class="pdf-btn" href="./cv.pdf" download="CV_Jerome_GOUNEAUD.pdf">⬇ Télécharger PDF</a>
 <nav>
   <div class="nav-inner">
     <span class="nav-logo"></span>
