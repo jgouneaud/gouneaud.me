@@ -413,7 +413,7 @@
     <div id="contact" class="contact-col">
       <div class="sec-head"><span class="sec-num">📝</span><h2 class="sec-title">Contact</h2></div>
       <p class="lede" style="margin-bottom: 1.4rem;">Une question, un projet ?</p>
-      <form class="contact-form" onsubmit="return false;">
+      <form class="contact-form" onsubmit="return sendContactMail(this);">
         <div class="form-row">
           <label>Nom
             <input type="text" name="nom" placeholder="Votre nom" required>
@@ -441,6 +441,17 @@
   </div>
 </div>
 
+<script>
+  function sendContactMail(form) {
+    var nom = form.nom.value.trim();
+    var email = form.email.value.trim();
+    var message = form.message.value.trim();
+    var subject = 'Contact depuis gouneaud.me — ' + nom;
+    var body = 'Nom : ' + nom + '\nEmail : ' + email + '\n\n' + message;
+    window.location.href = 'mailto:j@gouneaud.me?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    return false;
+  }
+</script>
 <script>
   (function () {
     var track = document.getElementById('actuTrack');
