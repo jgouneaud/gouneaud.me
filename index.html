@@ -137,7 +137,7 @@
   .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); }
   .contact-form button { align-self: flex-start; border: none; cursor: pointer; }
 
-  .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 1.6rem; }
+  .about-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-top: 2.2rem; }
   .about-stats .stat { border-top: 1px solid var(--accent2); padding-top: 0.8rem; text-align: center; display: block; color: inherit; text-decoration: none; }
   a.stat:hover b { text-decoration: underline; }
   .about-stats .stat b { font-family: "Outfit", sans-serif; font-size: 1.9rem; font-weight: 600; color: var(--accent); display: block; }
@@ -171,6 +171,7 @@
     .formation-contact-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 700px) {
+    .about-stats { grid-template-columns: repeat(2, 1fr); }
     .resume-actu-grid { grid-template-columns: 1fr; }
     .xp-grid { grid-template-columns: 1fr; }
     .contact-newsletter-grid { grid-template-columns: 1fr; }
@@ -211,18 +212,18 @@
       <div class="prose">
         <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">À propos</h2></div>
         <p class="lede">Ingénieur techno-pédagogique, je viens de l'éducation populaire, de la formation et de l'engagement associatif. Le numérique est entré dans mon parcours par la pratique : autodidacte, fondateur d'agence web, chef de projet, puis responsable de la transformation numérique pendant douze ans. Ce qui me motive : rendre le numérique accessible, utile et responsable. Aujourd'hui, je poursuis cette dynamique à travers une formation en NoCode/LowCode et IA générative, et une veille active sur les outils qui transforment nos façons de travailler.</p>
-        <div class="about-stats">
-          <div class="stat"><b>12 ans</b><span>Expérience</span></div>
-          <a class="stat" href="https://openbadgepassport.com/app/profile/67418" target="_blank" rel="noopener"><b>31</b><span>Mes Open Badges</span></a>
-          <div class="stat"><b>63</b><span>Ressources dans ma base de veille</span></div>
-          <div class="stat"><b>400h</b><span>Bootcamp DataRockstars</span></div>
-        </div>
       </div>
       <div class="veille-col">
         <div class="sec-head"><span class="sec-num">🔍</span><h2 class="sec-title">Veille</h2></div>
-        <p class="lede" style="margin-bottom: 1rem;">Base de ressources NoCode / IA / LowCode / Automatisation, alimentée automatiquement.</p>
-        <iframe src="https://typical-brain-fcd.notion.site/1335eb97d412439ebf72109e78c79efa?v=38de4f7f1931814ea78c000c81bce0e6" width="100%" height="480" frameborder="0" style="border-radius: 8px; border: 1px solid var(--line);" allowfullscreen title="Base de veille Notion"></iframe>
+        <p class="lede" style="margin-bottom: 1.2rem;">Base de ressources NoCode / IA / LowCode / Automatisation, alimentée automatiquement — 63 ressources scorées et classées.</p>
+        <a class="btn btn-primary" href="https://typical-brain-fcd.notion.site/1335eb97d412439ebf72109e78c79efa?v=38de4f7f1931814ea78c000c81bce0e6" target="_blank" rel="noopener">Consulter la base →</a>
       </div>
+    </div>
+    <div class="about-stats">
+      <div class="stat"><b>12 ans</b><span>Expérience</span></div>
+      <a class="stat" href="https://openbadgepassport.com/app/profile/67418" target="_blank" rel="noopener"><b>31</b><span>Mes Open Badges</span></a>
+      <div class="stat"><b>63</b><span>Ressources dans ma base de veille</span></div>
+      <div class="stat"><b>400h</b><span>Bootcamp DataRockstars</span></div>
     </div>
   </section>
 
