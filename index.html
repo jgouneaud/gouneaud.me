@@ -85,7 +85,8 @@
   .xp-stats b { font-family: "Outfit", sans-serif; font-size: 1.1rem; color: var(--ink); display: block; }
 
   .bloom-caption { font-size: 0.85rem; color: var(--muted); margin: -0.6rem 0 1.4rem; font-style: italic; }
-  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: start; }
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 1.6rem 2rem; align-items: start; }
+  .skills-grid .bloom-col { flex: 1 1 220px; }
   .skills-grid-4 { grid-template-columns: repeat(4, 1fr); }
   .skills-grid h4 { font-family: "DM Mono", monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin: 0 0 0.9rem; display: flex; flex-direction: column; gap: 0.2rem; }
   .bloom-sub { color: var(--muted); font-size: 0.68rem; letter-spacing: 0.02em; text-transform: none; }
@@ -113,27 +114,11 @@
   footer { padding: 2.5rem 0 4rem; font-size: 0.8rem; color: var(--muted); font-family: "DM Mono", monospace;}
 
   .resume-actu-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3.5rem; align-items: start; }
-  .actu-col .sec-head { margin-bottom: 1rem; }
-  .actu-carousel { position: relative; }
-  .actu-track { display: grid; }
-  .actu {
-    grid-area: 1 / 1; padding: 1rem 0 1rem 1rem; border-left: 1px solid var(--accent2); background: #fff;
-    opacity: 0; transition: opacity 0.7s ease; pointer-events: none;
-  }
-  .actu.active { opacity: 1; pointer-events: auto; }
-  .actu-top { display: flex; justify-content: space-between; gap: 0.5rem; font-family: "DM Mono", monospace; font-size: 0.68rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem;}
-  .actu h3 { font-family: "Outfit", sans-serif; font-weight: 500; font-size: 0.98rem; margin: 0.1rem 0 0.4rem; }
-  .actu p { color: var(--muted); font-size: 0.85rem; margin: 0 0 0.6rem; min-height: 2.6em; }
-  .actu a { color: var(--accent); text-decoration: none; font-size: 0.8rem; font-weight: 500; }
-  .actu-nav { display: flex; align-items: center; justify-content: center; gap: 0.9rem; margin-top: 0.8rem; }
-  .actu-arrow {
-    width: 1.8rem; height: 1.8rem; border-radius: 50%; border: 1px solid var(--accent2); background: #fff;
-    color: var(--accent); font-size: 1rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center;
-  }
-  .actu-arrow:hover { background: var(--wash); }
-  .actu-dots { display: flex; gap: 0.4rem; }
-  .actu-dot { width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--line); cursor: pointer; border: none; padding: 0; }
-  .actu-dot.active { background: var(--accent); }
+  .veille-col .sec-head { margin-bottom: 1rem; }
+
+  .comp-tools-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 3.5rem; align-items: start; }
+  .formation-contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3.5rem; align-items: start; }
+  .xp-grid-single { grid-template-columns: 1fr; }
 
   .contact-newsletter-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start;
@@ -151,6 +136,12 @@
   }
   .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); }
   .contact-form button { align-self: flex-start; border: none; cursor: pointer; }
+
+  .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 1.6rem; }
+  .about-stats .stat { border-top: 1px solid var(--accent2); padding-top: 0.8rem; text-align: center; display: block; color: inherit; text-decoration: none; }
+  a.stat:hover b { text-decoration: underline; }
+  .about-stats .stat b { font-family: "Outfit", sans-serif; font-size: 1.9rem; font-weight: 600; color: var(--accent); display: block; }
+  .about-stats .stat span { font-family: "DM Mono", monospace; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
 
   .cv-float {
     position: fixed; right: 0; top: 50%; transform: translateY(-50%);
@@ -175,8 +166,11 @@
   }
   .cookie-actions button.accept { background: var(--accent); border-color: var(--accent); }
 
+  @media (max-width: 900px) {
+    .comp-tools-grid { grid-template-columns: 1fr; }
+    .formation-contact-grid { grid-template-columns: 1fr; }
+  }
   @media (max-width: 700px) {
-    .skills-grid { grid-template-columns: 1fr; }
     .resume-actu-grid { grid-template-columns: 1fr; }
     .xp-grid { grid-template-columns: 1fr; }
     .contact-newsletter-grid { grid-template-columns: 1fr; }
@@ -208,7 +202,6 @@
       </div>
       <div class="cta-row">
         <a class="btn btn-primary" href="https://calendly.com/gouneaud/rdv-60" target="_blank" rel="noopener" onclick="return openCalendly(event);">📅 Prendre un RDV</a>
-        <a class="btn btn-ghost" href="#newsletter">📡 S'abonner à la veille</a>
       </div>
     </div>
   </header>
@@ -216,88 +209,78 @@
   <section class="section-resume">
     <div class="resume-actu-grid">
       <div class="prose">
-        <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">Résumé</h2></div>
-        <p class="lede">Ingénieur techno-pédagogique, je viens de l'éducation populaire, de la formation et de l'engagement associatif. Le numérique est entré dans mon parcours par la pratique : autodidacte, fondateur d'agence web, chef de projet, puis responsable de la transformation numérique pendant douze ans. Ce qui me motive : rendre le numérique accessible, utile et responsable.</p>
+        <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">À propos</h2></div>
+        <p class="lede">Ingénieur techno-pédagogique, je viens de l'éducation populaire, de la formation et de l'engagement associatif. Le numérique est entré dans mon parcours par la pratique : autodidacte, fondateur d'agence web, chef de projet, puis responsable de la transformation numérique pendant douze ans. Ce qui me motive : rendre le numérique accessible, utile et responsable. Aujourd'hui, je poursuis cette dynamique à travers une formation en NoCode/LowCode et IA générative, et une veille active sur les outils qui transforment nos façons de travailler.</p>
+        <div class="about-stats">
+          <div class="stat"><b>12 ans</b><span>Expérience</span></div>
+          <a class="stat" href="https://openbadgepassport.com/app/profile/67418" target="_blank" rel="noopener"><b>31</b><span>Mes Open Badges</span></a>
+          <div class="stat"><b>63</b><span>Ressources dans ma base de veille</span></div>
+          <div class="stat"><b>400h</b><span>Bootcamp DataRockstars</span></div>
+        </div>
       </div>
-      <div class="actu-col">
-        <div class="sec-head"><span class="sec-num">✦</span><h2 class="sec-title">Actualités</h2></div>
-        <div class="actu-carousel">
-          <div class="actu-track" id="actuTrack">
-            <div class="actu active">
-              <div class="actu-top"><span>SPOC · Open EdX · OBIN</span><span>Juil. 2026</span></div>
-              <h3>Transformation Numérique &amp; IA</h3>
-              <p>Parcours en 4 modules pour comprendre et utiliser l'IA au quotidien. Open Badges à chaque étape.</p>
-              <a href="https://formation.obin-asso.fr/courses/course-v1:OBIN+TNAO1+2026/about" target="_blank" rel="noopener">Voir le cours →</a>
-            </div>
-            <div class="actu">
-              <div class="actu-top"><span>Veille · Notion</span><span>190 ress.</span></div>
-              <h3>NoCode / IA / LowCode / Automatisation</h3>
-              <p>Base de ressources scorées et collectées automatiquement — rapports, tutoriels, comparatifs.</p>
-              <a href="https://shadowed-pull-45a.notion.site/3688647d968780f98380e6031065ab8c" target="_blank" rel="noopener">Consulter la base →</a>
-            </div>
+      <div class="veille-col">
+        <div class="sec-head"><span class="sec-num">🔍</span><h2 class="sec-title">Veille</h2></div>
+        <p class="lede" style="margin-bottom: 1rem;">Base de ressources NoCode / IA / LowCode / Automatisation, alimentée automatiquement.</p>
+        <iframe src="https://typical-brain-fcd.notion.site/1335eb97d412439ebf72109e78c79efa?v=38de4f7f1931814ea78c000c81bce0e6" width="100%" height="480" frameborder="0" style="border-radius: 8px; border: 1px solid var(--line);" allowfullscreen title="Base de veille Notion"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="comp-tools-grid">
+      <div class="comp-col">
+        <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Compétences</h2></div>
+        <p class="bloom-caption">Classées selon la taxonomie de Bloom, du plus élémentaire au plus complexe</p>
+        <div class="skills-grid">
+          <div class="bloom-col">
+            <h4>🧱 Mémoriser · Comprendre</h4>
+            <ul>
+              <li>Normes et procédés</li>
+              <li>Produits, outils et matières</li>
+              <li>Communication</li>
+              <li>Communication, multimédia</li>
+              <li>Être à l'écoute, faire preuve d'empathie</li>
+            </ul>
           </div>
-          <div class="actu-nav">
-            <button class="actu-arrow" onclick="actuMove(-1)" aria-label="Précédent">‹</button>
-            <div class="actu-dots" id="actuDots"></div>
-            <button class="actu-arrow" onclick="actuMove(1)" aria-label="Suivant">›</button>
+          <div class="bloom-col">
+            <h4>⚙️ Appliquer · Analyser</h4>
+            <ul>
+              <li>Organisation</li>
+              <li>Techniques professionnelles</li>
+              <li>Faire preuve d'autonomie</li>
+              <li>Faire preuve de réactivité</li>
+              <li>Data et nouvelles technologies</li>
+              <li>Domaines d'expertise</li>
+            </ul>
           </div>
+          <div class="bloom-col">
+            <h4>🚀 Évaluer · Créer</h4>
+            <ul>
+              <li>Conseil, transmission</li>
+              <li>Faire preuve de sens des responsabilités</li>
+              <li>LMS / MOOC / Open Badges</li>
+              <li>PHP / SQL / CSS / Python</li>
+              <li>Automatisation de workflows <span class="level level-cours">En cours</span></li>
+              <li>IA générative <span class="level level-cours">En cours</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tools-col">
+        <div class="sec-head"><span class="sec-num">🔧</span><h2 class="sec-title">Outils</h2></div>
+        <div class="tools-grid">
+          <span>Moodle</span><span>Google Workspace</span><span>WordPress</span>
+          <span>Drupal</span><span>H5P</span><span>Wooclap</span><span>ChatGPT</span>
+          <span>Claude</span><span>Open edX</span><span>Figma</span><span>Genially</span>
+          <span>Canva</span><span>Notion</span>
+          <span>Airtable</span><span>Make</span><span>Dify</span><span>n8n</span>
         </div>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Compétences</h2></div>
-    <p class="bloom-caption">Classées selon la taxonomie de Bloom, du plus élémentaire au plus complexe</p>
-    <div class="skills-grid">
-      <div class="bloom-col">
-        <h4>🧱 Mémoriser · Comprendre</h4>
-        <ul>
-          <li>Normes et procédés</li>
-          <li>Produits, outils et matières</li>
-          <li>Communication</li>
-          <li>Communication, multimédia</li>
-          <li>Être à l'écoute, faire preuve d'empathie</li>
-        </ul>
-      </div>
-      <div class="bloom-col">
-        <h4>⚙️ Appliquer · Analyser</h4>
-        <ul>
-          <li>Organisation</li>
-          <li>Techniques professionnelles</li>
-          <li>Faire preuve d'autonomie</li>
-          <li>Faire preuve de réactivité</li>
-          <li>Data et nouvelles technologies</li>
-          <li>Domaines d'expertise</li>
-        </ul>
-      </div>
-      <div class="bloom-col">
-        <h4>🚀 Évaluer · Créer</h4>
-        <ul>
-          <li>Conseil, transmission</li>
-          <li>Faire preuve de sens des responsabilités</li>
-          <li>LMS / MOOC / Open Badges</li>
-          <li>PHP / SQL / CSS / Python</li>
-          <li>Automatisation de workflows <span class="level level-cours">En cours</span></li>
-          <li>IA générative <span class="level level-cours">En cours</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Outils</h2></div>
-    <div class="tools-grid">
-      <span>Moodle</span><span>Google Workspace</span><span>WordPress</span>
-      <span>Drupal</span><span>H5P</span><span>Wooclap</span><span>ChatGPT</span>
-      <span>Claude</span><span>Open edX</span><span>Figma</span><span>Genially</span>
-      <span>Canva</span><span>Notion</span>
-      <span>Airtable</span><span>Make</span><span>Dify</span><span>n8n</span>
-    </div>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Expérience</h2></div>
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Expérience</h2></div>
     <div class="xp-grid">
       <div class="xp-item">
         <span class="xp-meta">2013 → présent · 12 ans 6 mois · Montpellier</span>
@@ -378,55 +361,51 @@
     </div>
   </section>
 
-  <section>
-    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Formation</h2></div>
-    <div class="xp-grid">
-      <div class="xp-item">
-        <span class="xp-meta">2026 — en cours</span>
-        <h3 class="xp-title">Certification RNCP niveau 6 — NoCode/LowCode &amp; IA générative</h3>
-        <p class="xp-org">DataRockstars — Bootcamp 400h</p>
-      </div>
-      <div class="xp-item">
-        <span class="xp-meta">2020 — 2021</span>
-        <h3 class="xp-title">Master 2 Humanités Numériques — Mention Très Bien</h3>
-        <p class="xp-org">Université Paul-Valéry Montpellier 3</p>
-      </div>
-      <div class="xp-item">
-        <span class="xp-meta">2013</span>
-        <h3 class="xp-title">DU Conducteur &amp; Intégrateur Web</h3>
-        <p class="xp-org">Université Paris 13</p>
-      </div>
-      <div class="xp-item">
-        <span class="xp-meta">2003 — 2004</span>
-        <h3 class="xp-title">Cyberdocumentaliste dans la société de l'information</h3>
-        <p class="xp-org">Université Paul-Valéry Montpellier 3</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="newsletter" class="contact-newsletter-grid">
-    <div class="newsletter-col">
-      <div class="sec-head"><span class="sec-num">✉</span><h2 class="sec-title">Newsletter · Veille NoCode &amp; IA</h2></div>
-      <p class="lede" style="margin-bottom: 1.2rem;">Recevez les nouveautés de la base de veille et les prochaines sessions du SPOC directement par e-mail.</p>
-      <iframe data-tally-src="https://tally.so/embed/QKOyMp?alignLeft=0&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="120" frameborder="0" marginheight="0" marginwidth="0" title="Newsletter"></iframe>
-    </div>
-    <div id="contact" class="contact-col">
-      <div class="sec-head"><span class="sec-num">📝</span><h2 class="sec-title">Contact</h2></div>
-      <p class="lede" style="margin-bottom: 1.4rem;">Une question, un projet ? Écris-moi directement.</p>
-      <form class="contact-form" onsubmit="return false;">
-        <div class="form-row">
-          <label>Nom
-            <input type="text" name="nom" placeholder="Votre nom" required>
-          </label>
-          <label>Email
-            <input type="email" name="email" placeholder="vous@exemple.com" required>
-          </label>
+  <section id="newsletter">
+    <div class="formation-contact-grid">
+      <div class="formation-col">
+        <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Formation</h2></div>
+        <div class="xp-grid xp-grid-single">
+          <div class="xp-item">
+            <span class="xp-meta">2026 — en cours</span>
+            <h3 class="xp-title">Certification RNCP niveau 6 — NoCode/LowCode &amp; IA générative</h3>
+            <p class="xp-org">DataRockstars — Bootcamp 400h</p>
+          </div>
+          <div class="xp-item">
+            <span class="xp-meta">2020 — 2021</span>
+            <h3 class="xp-title">Master 2 Humanités Numériques — Mention Très Bien</h3>
+            <p class="xp-org">Université Paul-Valéry Montpellier 3</p>
+          </div>
+          <div class="xp-item">
+            <span class="xp-meta">2013</span>
+            <h3 class="xp-title">DU Conducteur &amp; Intégrateur Web</h3>
+            <p class="xp-org">Université Paris 13</p>
+          </div>
+          <div class="xp-item">
+            <span class="xp-meta">2003 — 2004</span>
+            <h3 class="xp-title">Cyberdocumentaliste dans la société de l'information</h3>
+            <p class="xp-org">Université Paul-Valéry Montpellier 3</p>
+          </div>
         </div>
-        <label>Message
-          <textarea name="message" rows="4" placeholder="Votre message" required></textarea>
-        </label>
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-      </form>
+      </div>
+      <div id="contact" class="contact-col">
+        <div class="sec-head"><span class="sec-num">📝</span><h2 class="sec-title">Contact</h2></div>
+        <p class="lede" style="margin-bottom: 1.4rem;">Une question, un projet ?</p>
+        <form class="contact-form" onsubmit="return false;">
+          <div class="form-row">
+            <label>Nom
+              <input type="text" name="nom" placeholder="Votre nom" required>
+            </label>
+            <label>Email
+              <input type="email" name="email" placeholder="vous@exemple.com" required>
+            </label>
+          </div>
+          <label>Message
+            <textarea name="message" rows="4" placeholder="Votre message" required></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary">Envoyer</button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -441,42 +420,6 @@
   </div>
 </div>
 
-<script>
-  (function () {
-    var track = document.getElementById('actuTrack');
-    var dotsWrap = document.getElementById('actuDots');
-    var slides = track.children;
-    var index = 0;
-
-    for (var i = 0; i < slides.length; i++) {
-      var dot = document.createElement('button');
-      dot.className = 'actu-dot' + (i === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', 'Aller à l\'actualité ' + (i + 1));
-      dot.addEventListener('click', (function (idx) { return function () { actuGoTo(idx); }; })(i));
-      dotsWrap.appendChild(dot);
-    }
-
-    window.actuGoTo = function (i) {
-      index = (i + slides.length) % slides.length;
-      for (var s = 0; s < slides.length; s++) {
-        slides[s].classList.toggle('active', s === index);
-      }
-      var dots = dotsWrap.children;
-      for (var d = 0; d < dots.length; d++) {
-        dots[d].classList.toggle('active', d === index);
-      }
-    };
-    window.actuMove = function (delta) { actuGoTo(index + delta); };
-
-    function actuRandom() {
-      if (slides.length < 2) return;
-      var next;
-      do { next = Math.floor(Math.random() * slides.length); } while (next === index);
-      actuGoTo(next);
-    }
-    setInterval(actuRandom, 5000);
-  })();
-</script>
 <script>
   function openCalendly(e) {
     if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
