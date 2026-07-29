@@ -48,8 +48,8 @@
     display: flex; flex-wrap: wrap; gap: 1.2rem; font-size: 0.85rem; color: var(--muted);
     padding-bottom: 1.5rem; border-bottom: 1px solid var(--line);
   }
-  .contacts a { color: var(--muted); text-decoration: none; }
-  .contacts a:hover { color: var(--accent); }
+  .contacts a { color: var(--accent); text-decoration: none; }
+  .contacts a:hover { text-decoration: underline; }
   .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; padding: 1.25rem 0 1.25rem; }
   .btn {
     font-family: "DM Mono", monospace; font-size: 0.78rem; padding: 0.65rem 1.1rem;
@@ -207,7 +207,7 @@
         <a href="https://openbadgepassport.com/app/profile/67418" target="_blank" rel="noopener">⬡ Open Badges</a>
       </div>
       <div class="cta-row">
-        <a class="btn btn-primary" href="https://calendly.com/gouneaud/rdv-30min" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/gouneaud/rdv-30min'}); return false;">💬 Échangeons</a>
+        <a class="btn btn-primary" href="https://calendly.com/gouneaud/rdv-60" target="_blank" rel="noopener" onclick="return openCalendly(event);">📅 Prendre un RDV</a>
         <a class="btn btn-ghost" href="#newsletter">📡 S'abonner à la veille</a>
       </div>
     </div>
@@ -251,7 +251,7 @@
     <p class="bloom-caption">Classées selon la taxonomie de Bloom, du plus élémentaire au plus complexe</p>
     <div class="skills-grid">
       <div class="bloom-col">
-        <h4>🧱 Bases <span class="bloom-sub">Mémoriser · Comprendre</span></h4>
+        <h4>🧱 Mémoriser · Comprendre</h4>
         <ul>
           <li>Normes et procédés</li>
           <li>Produits, outils et matières</li>
@@ -261,7 +261,7 @@
         </ul>
       </div>
       <div class="bloom-col">
-        <h4>⚙️ Mise en œuvre <span class="bloom-sub">Appliquer · Analyser</span></h4>
+        <h4>⚙️ Appliquer · Analyser</h4>
         <ul>
           <li>Organisation</li>
           <li>Techniques professionnelles</li>
@@ -272,7 +272,7 @@
         </ul>
       </div>
       <div class="bloom-col">
-        <h4>🚀 Conception <span class="bloom-sub">Évaluer · Créer</span></h4>
+        <h4>🚀 Évaluer · Créer</h4>
         <ul>
           <li>Conseil, transmission</li>
           <li>Faire preuve de sens des responsabilités</li>
@@ -412,8 +412,8 @@
     </div>
     <div id="contact" class="contact-col">
       <div class="sec-head"><span class="sec-num">📝</span><h2 class="sec-title">Contact</h2></div>
-      <p class="lede" style="margin-bottom: 1.4rem;">Une question, un projet ?</p>
-      <form class="contact-form" onsubmit="return sendContactMail(this);">
+      <p class="lede" style="margin-bottom: 1.4rem;">Une question, un projet ? Écris-moi directement.</p>
+      <form class="contact-form" onsubmit="return false;">
         <div class="form-row">
           <label>Nom
             <input type="text" name="nom" placeholder="Votre nom" required>
@@ -441,17 +441,6 @@
   </div>
 </div>
 
-<script>
-  function sendContactMail(form) {
-    var nom = form.nom.value.trim();
-    var email = form.email.value.trim();
-    var message = form.message.value.trim();
-    var subject = 'Contact depuis gouneaud.me — ' + nom;
-    var body = 'Nom : ' + nom + '\nEmail : ' + email + '\n\n' + message;
-    window.location.href = 'mailto:j@gouneaud.me?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    return false;
-  }
-</script>
 <script>
   (function () {
     var track = document.getElementById('actuTrack');
@@ -487,6 +476,17 @@
     }
     setInterval(actuRandom, 5000);
   })();
+</script>
+<script>
+  function openCalendly(e) {
+    if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+      e.preventDefault();
+      window.Calendly.initPopupWidget({ url: 'https://calendly.com/gouneaud/rdv-60' });
+      return false;
+    }
+    // Calendly pas encore chargé (ou bloqué) : on laisse le lien ouvrir la page directement
+    return true;
+  }
 </script>
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script async src="https://tally.so/widgets/embed.js"></script>
