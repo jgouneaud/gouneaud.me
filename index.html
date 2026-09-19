@@ -136,6 +136,19 @@
   .parcours-link { font-family: "DM Mono", monospace; font-size: 0.85rem; color: var(--accent); text-decoration: none; display: inline-block; margin-top: 1.2rem; font-weight: 500; }
   .parcours-link:hover { text-decoration: underline; }
 
+  /* Réalisations */
+  .real-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-top: 1rem; }
+  .real-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.6rem;
+    box-shadow: var(--shadow); text-decoration: none; color: inherit; display: block;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .real-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+  .real-card h3 { font-family: "Outfit", sans-serif; font-size: 1rem; font-weight: 600; margin: 0 0 0.5rem; color: var(--accent); }
+  .real-card p { color: var(--muted); font-size: 0.88rem; margin: 0; }
+  @media (max-width: 900px) { .real-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .real-grid { grid-template-columns: 1fr; } }
+
   /* Tools */
   .tools-grid { display: flex; flex-wrap: wrap; gap: 1.1rem; }
   .tools-grid span {
@@ -274,6 +287,31 @@
       <a class="stat" href="https://openbadgepassport.com/app/profile/67418" target="_blank" rel="noopener"><b><span class="countup" data-target="31" data-suffix="">0</span></b><span>Open Badges</span></a>
       <div class="stat"><b><span class="countup" data-target="63" data-suffix="">0</span></b><span>Ressources</span></div>
       <div class="stat"><b><span class="countup" data-target="400" data-suffix="">0</span></b><span>Heures de bootcamp</span></div>
+    </div>
+  </section>
+
+  <section id="realisations">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Concret</span>
+      <h2>Ce que j'ai construit</h2>
+    </div>
+    <div class="real-grid">
+      <a class="real-card" href="https://obin-asso.fr" target="_blank" rel="noopener">
+        <h3>OBIN</h3>
+        <p>Association pour la citoyenneté et l'inclusion numérique, que j'ai fondée.</p>
+      </a>
+      <a class="real-card" href="https://formation.obin-asso.fr/courses/course-v1:OBIN+TNAO1+2026/about" target="_blank" rel="noopener">
+        <h3>SPOC Transformation numérique &amp; IA</h3>
+        <p>Formation en ligne ouverte, conçue et scénarisée, ouverture juillet 2026.</p>
+      </a>
+      <a class="real-card" href="https://marketplace.moodle.com/plugins/3965" target="_blank" rel="noopener">
+        <h3>Thème Moodle OBIN</h3>
+        <p>Thème publié sur le Marketplace officiel de Moodle.</p>
+      </a>
+      <a class="real-card" href="https://shadowed-pull-45a.notion.site/3688647d968780f98380e6031065ab8c" target="_blank" rel="noopener">
+        <h3>Veille</h3>
+        <p>Base de ressources sur la transformation numérique et pédagogique.</p>
+      </a>
     </div>
   </section>
 
