@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parcours, Jérôme Gouneaud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="0785cf38-b913-4432-a61b-257469238c7f"></script>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #6b6b6b;
+    --line: #e4e4e4;
+    --accent: #259E99;
+    --accent2: #8ED0CD;
+    --wash: #eef7f6;
+    --bg: #ffffff;
+    --paper: #fafaf9;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { width: 100%; margin: 0; padding: 0 5vw; }
+  .prose { max-width: 760px; }
+  header.top { padding: 3rem 0 1rem; }
+  .kicker {
+    font-family: "DM Mono", monospace; font-size: 0.75rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 1.5rem;
+    display: inline-block; background: var(--wash); padding: 0.3rem 0.7rem; border-radius: 999px;
+  }
+  .back-link { font-family: "DM Mono", monospace; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+  .back-link:hover { text-decoration: underline; }
+  h1.name {
+    font-family: "Outfit", sans-serif; font-weight: 300; font-size: 2.4rem; margin: 0.8rem 0 0.4rem;
+    letter-spacing: -0.01em;
+  }
+  h1.name b { font-weight: 600; color: var(--accent); }
+  .role { color: var(--muted); font-size: 1rem; margin: 0 0 1.5rem; font-weight: 700; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
+
+  section { padding: 2rem 0; border-bottom: 1px solid var(--line); }
+  section:nth-of-type(even) { background: var(--wash); margin: 0 -5vw; padding: 2rem 5vw; border-bottom: none; border-radius: 8px; }
+  section:last-of-type { border-bottom: none; }
+  .sec-head { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1.4rem; }
+  .sec-num {
+    font-family: "DM Mono", monospace; color: #fff; background: var(--accent); font-size: 0.75rem;
+    width: 1.7rem; height: 1.7rem; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .sec-title { font-family: "Outfit", sans-serif; font-weight: 400; font-size: 1.3rem; margin: 0; }
+  p.lede { color: var(--ink); font-size: 1rem; }
+
+  .xp-item { padding: 1.4rem 0 1.4rem 1.1rem; border-top: 1px solid var(--line); border-left: 1px solid var(--accent2); }
+  .xp-item:first-child { border-top: none; }
+  .xp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 3rem; align-items: start; }
+  .xp-grid .xp-item { border-top: none; padding-top: 0; }
+  .xp-grid-single { grid-template-columns: 1fr; }
+  .xp-meta { font-family: "DM Mono", monospace; font-size: 0.72rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.04em; }
+  .xp-title { font-family: "Outfit", sans-serif; font-size: 1.1rem; font-weight: 500; margin: 0.3rem 0 0.1rem; }
+  .xp-org { color: var(--accent); font-size: 0.88rem; margin: 0 0 0.6rem; }
+  .xp-item ul { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.9rem; }
+  .xp-item li { margin-bottom: 0.3rem; }
+  .xp-stats { display: flex; gap: 1.5rem; margin-top: 0.8rem; }
+  .xp-stats span { font-family: "DM Mono", monospace; font-size: 0.78rem; color: var(--accent); }
+  .xp-stats b { font-family: "Outfit", sans-serif; font-size: 1.1rem; color: var(--ink); display: block; }
+
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 1.6rem 2rem; align-items: start; }
+  .skills-grid .bloom-col { flex: 1 1 220px; }
+  .skills-grid h4 { font-family: "DM Mono", monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin: 0 0 0.9rem; }
+  .skills-grid ul { list-style: none; margin: 0; padding: 0; font-size: 0.88rem; }
+  .skills-grid li { padding: 0.4rem 0; border-top: 1px solid var(--accent2); display: flex; justify-content: space-between; gap: 0.5rem; }
+  .skills-grid li:first-child { border-top: none; }
+  .skills-grid .level {
+    color: #fff; font-family: "DM Mono", monospace; font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.03em; background: var(--accent); border-radius: 999px; padding: 0.25rem 0.7rem;
+    flex-shrink: 0; align-self: center;
+  }
+  .skills-grid .level-cours { color: var(--muted); background: none; border: 1px solid var(--line); }
+
+  .tools-grid { display: flex; flex-wrap: wrap; gap: 0.6rem 0.8rem; }
+  .tools-grid span {
+    font-family: "DM Mono", monospace; font-size: 0.75rem; color: var(--accent);
+    border: 1px solid var(--accent2); background: #fff; padding: 0.4rem 0.85rem; border-radius: 8px;
+  }
+  footer { padding: 2.5rem 0 4rem; font-size: 0.8rem; color: var(--muted); font-family: "DM Mono", monospace;}
+
+  .cv-float {
+    position: fixed; right: 0; top: 50%; transform: translateY(-50%);
+    writing-mode: vertical-rl; text-orientation: mixed;
+    background: var(--accent); color: #fff; font-family: "DM Mono", monospace; font-size: 0.78rem;
+    padding: 1rem 0.6rem; border-radius: 8px 0 0 8px; text-decoration: none; letter-spacing: 0.02em;
+    z-index: 50; box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+  }
+  .cv-float:hover { background: #1f8580; }
+
+  .cookie-banner {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 100;
+    background: rgba(30,34,33,0.92); color: #f2f2f2; backdrop-filter: blur(4px);
+    padding: 0.9rem 5vw; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+    font-size: 0.85rem;
+  }
+  .cookie-banner p { margin: 0; max-width: 60ch; }
+  .cookie-actions { display: flex; gap: 0.6rem; flex-shrink: 0; }
+  .cookie-actions button {
+    font-family: "DM Mono", monospace; font-size: 0.78rem; padding: 0.5rem 1rem; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #fff; cursor: pointer;
+  }
+  .cookie-actions button.accept { background: var(--accent); border-color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .xp-grid { grid-template-columns: 1fr; }
+    .cv-float { display: none; }
+  }
+  @media (max-width: 480px) {
+    h1.name { font-size: 1.9rem; }
+    .sec-title { font-size: 1.15rem; }
+  }
+</style>
+</head>
+<body>
+<a class="cv-float" href="CV_4_Jerome_GOUNEAUD.pdf" download>📄 Télécharger le CV</a>
+<div class="wrap">
+  <header class="top">
+    <div class="prose">
+      <a class="back-link" href="index.html">← Retour à l'accueil</a>
+      <h1 class="name"><b>Jérôme</b> Gouneaud</h1>
+      <p class="role">Parcours complet : expérience, formation, compétences</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">Expérience</h2></div>
+    <div class="xp-grid">
+      <div class="xp-item">
+        <span class="xp-meta">2013 → présent · 12 ans 6 mois · Montpellier</span>
+        <h3 class="xp-title">Responsable de la Transformation Numérique</h3>
+        <p class="xp-org">Maison des Adolescents de l'Hérault 34</p>
+        <ul>
+          <li>Pilotage stratégique de la feuille de route numérique</li>
+          <li>Accompagnement au changement vers les usages digitaux</li>
+          <li>Ingénierie de solutions SI, gestion de données, efficacité opérationnelle</li>
+          <li>Mise en conformité RGPD et politique de sécurité des SI</li>
+          <li>Facilitateur d'usages numériques comme levier d'autonomie</li>
+          <li>Coordinateur départemental Promeneurs du Net / Webwalkers (2017–2020), département pilote national : réseau de 50 professionnels, formations, partenariat CAF</li>
+        </ul>
+      </div>
+      <div class="xp-item">
+        <span class="xp-meta">Mars–sept. 2020 · 7 mois</span>
+        <h3 class="xp-title">Projet MOOC &amp; Open Badges</h3>
+        <p class="xp-org">Maison des Adolescents (Master Humanités Numériques)</p>
+        <ul>
+          <li>Conception d'un parcours de formation en ligne sur LMS Moodle</li>
+          <li>Scénarisation pédagogique : modules, quiz, vidéos, forums</li>
+          <li>Animation de la communauté d'apprenants</li>
+          <li>Dispositif de reconnaissance des compétences via Open Badges</li>
+        </ul>
+        <div class="xp-stats">
+          <span><b>277</b>participants</span>
+          <span><b>51</b>badges délivrés</span>
+        </div>
+      </div>
+      <div class="xp-item">
+        <span class="xp-meta">2020–2021 · 1 an 1 mois · Montpellier</span>
+        <h3 class="xp-title">Ingénieur pour l'Enseignement Numérique</h3>
+        <p class="xp-org">Université de Montpellier, SUN</p>
+        <ul>
+          <li>Accompagnement des enseignants dans leurs projets numériques</li>
+          <li>Conception de ressources pédagogiques (MOOC, SPOC)</li>
+          <li>Administration des plateformes d'enseignement hybride</li>
+        </ul>
+      </div>
+      <div class="xp-item">
+        <span class="xp-meta">2004–2013 · 9 ans 9 mois · Gignac</span>
+        <h3 class="xp-title">Co-fondateur &amp; Chef de Projet Web</h3>
+        <p class="xp-org">Agence OUI (ex-ARIAC SCOP)</p>
+        <ul>
+          <li>Co-création et développement d'une agence de communication web</li>
+          <li>Direction de projets Open Source et Ecommerce (audit, UX/UI)</li>
+          <li>Accompagnement stratégique à la transformation numérique</li>
+          <li>Formation à l'autonomie sur outils CMS</li>
+        </ul>
+      </div>
+      <div class="xp-item">
+        <span class="xp-meta">2004 · 4 mois · Montpellier</span>
+        <h3 class="xp-title">Cyberdocumentaliste</h3>
+        <p class="xp-org">HORIBA ABX SAS</p>
+        <ul>
+          <li>Intégration et paramétrage du logiciel ZyLAB (GED) pour les services R&amp;D</li>
+          <li>Structuration des flux documentaires techniques et veille stratégique</li>
+        </ul>
+      </div>
+      <div class="xp-item">
+        <span class="xp-meta">2000–2003 · 2 ans 9 mois</span>
+        <h3 class="xp-title">Animateur Social de Proximité</h3>
+        <p class="xp-org">Radio Pays d'Hérault</p>
+        <ul>
+          <li>Animation de débats thématiques, ateliers radio et reportages de terrain</li>
+          <li>Éducation aux médias et initiation à l'expression radiophonique comme vecteur d'insertion sociale</li>
+        </ul>
+      </div>
+      <div class="xp-item">
+        <span class="xp-meta">1996–1999 · 3 ans 3 mois · Montpellier</span>
+        <h3 class="xp-title">Formateur &amp; Animateur en Éducation Populaire</h3>
+        <p class="xp-org">CEMEA Occitanie</p>
+        <ul>
+          <li>Formation et animation en éducation populaire</li>
+          <li>Méthodes actives et co-construction des savoirs avec les publics</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Formation</h2></div>
+    <div class="xp-grid xp-grid-single">
+      <div class="xp-item">
+        <span class="xp-meta">2026, en cours</span>
+        <h3 class="xp-title">Certification RNCP niveau 6, NoCode/LowCode &amp; IA générative</h3>
+        <p class="xp-org">DataRockstars, Bootcamp 400h</p>
+      </div>
+      <div class="xp-item">
+        <span class="xp-meta">2020, 2021</span>
+        <h3 class="xp-title">Master 2 Humanités Numériques, Mention Très Bien</h3>
+        <p class="xp-org">Université Paul-Valéry Montpellier 3</p>
+      </div>
+      <div class="xp-item">
+        <span class="xp-meta">2013</span>
+        <h3 class="xp-title">DU Conducteur &amp; Intégrateur Web</h3>
+        <p class="xp-org">Université Paris 13</p>
+      </div>
+      <div class="xp-item">
+        <span class="xp-meta">2003, 2004</span>
+        <h3 class="xp-title">Cyberdocumentaliste dans la société de l'information</h3>
+        <p class="xp-org">Université Paul-Valéry Montpellier 3</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Compétences</h2></div>
+    <div class="skills-grid">
+      <div class="bloom-col">
+        <h4>Ingénierie pédagogique &amp; LMS</h4>
+        <ul>
+          <li>Animer des sessions de formation</li>
+          <li>Concevoir l'ingénierie de formation et les séquences pédagogiques</li>
+          <li>Intégrer des médias variés dans l'enseignement</li>
+          <li>Utiliser et former aux outils numériques</li>
+          <li>Administrer Moodle / Open edX</li>
+          <li>Écoute active, empathie <span class="level">Soft skill</span></li>
+        </ul>
+      </div>
+      <div class="bloom-col">
+        <h4>Gestion de projet &amp; SI/RGPD</h4>
+        <ul>
+          <li>Gestion de projet</li>
+          <li>Sécurité des systèmes d'information, RGPD</li>
+          <li>Rédiger un cahier des charges, spécifications techniques</li>
+          <li>Analyser les besoins et maquetter une application</li>
+          <li>Sens des responsabilités, gestion d'équipe <span class="level">Soft skill</span></li>
+          <li>Autonomie, réactivité, esprit d'analyse <span class="level">Soft skill</span></li>
+          <li>Anglais technique</li>
+        </ul>
+      </div>
+      <div class="bloom-col">
+        <h4>Tech &amp; Automatisations</h4>
+        <ul>
+          <li>Conception d'interfaces utilisateur (UI)</li>
+          <li>Concevoir et optimiser une application web sécurisée</li>
+          <li>Concevoir une base de données relationnelle (SQL/NoSQL)</li>
+          <li>PHP / SQL / CSS / Python</li>
+          <li>Automatisation de workflows <span class="level level-cours">En cours</span></li>
+          <li>IA générative</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"></path></svg></span><h2 class="sec-title">Outils</h2></div>
+    <div class="tools-grid">
+      <span>Moodle</span><span>Google Workspace</span><span>WordPress</span>
+      <span>Drupal</span><span>H5P</span><span>Wooclap</span><span>ChatGPT</span>
+      <span>Claude</span><span>Open edX</span><span>Figma</span><span>Genially</span>
+      <span>Canva</span><span>Notion</span>
+      <span>Airtable</span><span>Make</span><span>Dify</span><span>n8n</span><span>Docker</span><span>Dolibarr</span>
+    </div>
+  </section>
+
+  <footer>© 2026 Jérôme Gouneaud · gouneaud.me · <a class="back-link" href="index.html">Retour à l'accueil</a></footer>
+</div>
+
+<div class="cookie-banner" id="cookieBanner">
+  <p>Ce site utilise des cookies fonctionnels. Aucune donnée n'est transmise à des tiers.</p>
+  <div class="cookie-actions">
+    <button type="button" onclick="document.getElementById('cookieBanner').style.display='none'">Refuser</button>
+    <button type="button" class="accept" onclick="document.getElementById('cookieBanner').style.display='none'">Accepter</button>
+  </div>
+</div>
+
+<!-- Cal floating-popup embed code begins -->
+<script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "60-min", {origin:"https://app.cal.com"});
+  Cal.config = Cal.config || {};
+  Cal.config.forwardQueryParams = true;
+  Cal.ns["60-min"]("floatingButton", {"calLink":"jerome-gouneaud-c50fmx/60-min","buttonText":"Prendre un RDV","config":{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}});
+  Cal.ns["60-min"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+</script>
+<!-- Cal floating-popup embed code ends -->
+</body>
+</html>
